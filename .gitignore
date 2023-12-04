@@ -1,3 +1,4 @@
 .env/
 __pycache__/
 STATS_ALL.txt
+api.key

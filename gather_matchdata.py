@@ -57,9 +57,12 @@ def gathering(puuids_set: set, area: str):
                         print('Connection error. Sleep for 3 seconds...')
                         time.sleep(3)
                         continue
+                    except KeyError:
+                        print('Key Error occured. Retry...')
+                        time.sleep(3)
                 
                 kills = sum(result['participants'][k]['kills'] for k in range(10))
-                if kills > 50 and result['info']['gameMode'] == 'ARAM':
+                if kills > 50 and result['gameMode'] == 'ARAM':
 
                     champions_ids = [result['participants'][p]['championId'] for p in range(10)]
                     champions_names = [ALL_CHAMPIONS_IDs.get(champions_ids[i]) for i in range(10)]

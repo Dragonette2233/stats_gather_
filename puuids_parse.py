@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from pprint import pprint
-# from mcf_riot_api import RiotAPI
+import sys
 from aiohttp import ClientSession
 from aiohttp.client_exceptions import (
     ClientProxyConnectionError,
@@ -73,8 +73,8 @@ def parse_games():
                 # missing_regions = 20
                 
     puuids_set = set()
-    # print('here')
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    if sys.platform.startswith('win'):
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(main_aram())
     # print('here')
     return puuids_set
