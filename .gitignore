@@ -2,3 +2,5 @@
 __pycache__/
 STATS_ALL.txt
 api.key
+jsn_test.py
+jsn_creating.py
