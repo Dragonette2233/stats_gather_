@@ -58,36 +58,38 @@ def gathering(puuids_set: set, area: str):
                         time.sleep(3)
                         continue
                     except KeyError:
-                        print('Key Error occured. Retry...')
-                        time.sleep(3)
+                        result = None
+                        print('Key Error occured. Breaking...')
+                        break
                 
-                kills = sum(result['participants'][k]['kills'] for k in range(10))
-                if kills > 50 and result['gameMode'] == 'ARAM':
+                if result:
+                    kills = sum(result['participants'][k]['kills'] for k in range(10))
+                    if kills > 50 and result['gameMode'] == 'ARAM':
 
-                    champions_ids = [result['participants'][p]['championId'] for p in range(10)]
-                    champions_names = [ALL_CHAMPIONS_IDs.get(champions_ids[i]) for i in range(10)]
-                    # team_blue = champions_names[0:5]
-                    # team_red = champions_names[5:10]
+                        champions_ids = [result['participants'][p]['championId'] for p in range(10)]
+                        champions_names = [ALL_CHAMPIONS_IDs.get(champions_ids[i]) for i in range(10)]
+                        # team_blue = champions_names[0:5]
+                        # team_red = champions_names[5:10]
 
-                    roles_blue = _converted_roles(champions_names[0:5])
-                    roles_red = _converted_roles(champions_names[5:10])
+                        roles_blue = _converted_roles(champions_names[0:5])
+                        roles_red = _converted_roles(champions_names[5:10])
 
-                    if result['teams'][0]['win']:
-                        # res_value = f"{'_'.join(team_blue)} -- {'_'.join(team_red)} -- {kills}"
-                        res_value_2 = f"{roles_blue}_{roles_red}_{kills}"
-                    else:
-                        # res_value = f"{'_'.join(team_red)} -- {'_'.join(team_blue)} -- {kills}"
-                        res_value_2 = f"{roles_red}_{roles_blue}_{kills}"
-                    
-                    with SET_LCK:
-                        GATHERED_MATCHES.add(game_id)
-                        with open('STATS_all.txt', 'a+') as stats_file:
-                            stats_file.writelines(res_value_2 + '\n')
-                    
-                    if area == 'europe':
-                        time.sleep(1.21)
-                    else:
-                        time.sleep(0.4)
+                        if result['teams'][0]['win']:
+                            # res_value = f"{'_'.join(team_blue)} -- {'_'.join(team_red)} -- {kills}"
+                            res_value_2 = f"{roles_blue}_{roles_red}_{kills}_{game_id[-4:]}"
+                        else:
+                            # res_value = f"{'_'.join(team_red)} -- {'_'.join(team_blue)} -- {kills}"
+                            res_value_2 = f"{roles_red}_{roles_blue}_{kills}_{game_id[-4:]}"
+                        
+                        with SET_LCK:
+                            GATHERED_MATCHES.add(game_id)
+                            with open('STATS_all.txt', 'a+') as stats_file:
+                                stats_file.writelines(res_value_2 + '\n')
+                        
+                        if area == 'europe':
+                            time.sleep(1.21)
+                        else:
+                            time.sleep(0.4)
 
     print(f'Circle ended in {area}')
             
