@@ -49,10 +49,6 @@ def main():
             break
         time.sleep(5)
 
-    
-    # input()
-
-
 if __name__ == '__main__':
     while True:
         main()

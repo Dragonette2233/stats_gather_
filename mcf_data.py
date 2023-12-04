@@ -10,7 +10,7 @@ SET_LCK = threading.Lock()
 GATHERED_MATCHES = set()
 
 headers_timeout = {
-            'headers': { "X-Riot-Token": 'RGAPI_' },
+            'headers': { "X-Riot-Token": 'RGAPI-2c5a7365-2bb6-4153-ae29-1e618e55208e' },
             'timeout': 3
         }
 FEATURED_GAMES_URL = "https://{region}.api.riotgames.com/lol/spectator/v4/featured-games"

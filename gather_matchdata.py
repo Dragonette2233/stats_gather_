@@ -43,7 +43,7 @@ def gathering(puuids_set: set, area: str):
         for game_id in result:
 
             if game_id not in GATHERED_MATCHES:
-
+                # print(game_id)
                 while True:
                     try:
                         result = requests.get(
@@ -59,7 +59,7 @@ def gathering(puuids_set: set, area: str):
                         continue
                 
                 kills = sum(result['participants'][k]['kills'] for k in range(10))
-                if kills > 50:
+                if kills > 50 and result['info']['gameMode'] == 'ARAM':
 
                     champions_ids = [result['participants'][p]['championId'] for p in range(10)]
                     champions_names = [ALL_CHAMPIONS_IDs.get(champions_ids[i]) for i in range(10)]
@@ -80,10 +80,11 @@ def gathering(puuids_set: set, area: str):
                         GATHERED_MATCHES.add(game_id)
                         with open('STATS_all.txt', 'a+') as stats_file:
                             stats_file.writelines(res_value_2 + '\n')
-                    # print(res_value)
-                    # print(res_value_2)
-                    # input()
-                    time.sleep(1.21)
+                    
+                    if area == 'europe':
+                        time.sleep(1.21)
+                    else:
+                        time.sleep(0.4)
 
     print(f'Circle ended in {area}')
             
