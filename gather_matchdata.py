@@ -24,7 +24,7 @@ def gathering(puuids_set: set, area: str):
         
         return ''.join(sorted(converted_list))
 
-    logger.debug('[{area}] Circle rounded'.format(area=area))
+    logger.info('[{area}] Circle rounded'.format(area=area))
 
     for puuid in puuids_set:
         while True:
@@ -91,7 +91,7 @@ def gathering(puuids_set: set, area: str):
                         else:
                             time.sleep(0.4)
 
-    logger.debug('[{area}] Circle ended'.format(area=area))
+    logger.info('[{area}] Circle ended'.format(area=area))
             
             
             

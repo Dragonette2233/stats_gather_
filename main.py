@@ -5,7 +5,7 @@ from mcf_threads import MCFThread
 import logging
 
 # Определяем уровень логирования (DEBUG - наиболее детальный, ERROR - наименее детальный)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 # Формат сообщения лога
 # %(asctime)s - Дата и время
