@@ -63,7 +63,7 @@ def gathering(puuids_set: set, area: str):
                         break
                 
                 if result:
-                    kills = sum(result['participants'][k]['kills'] for k in range(10))
+                    kills = sum(result['participants'][k]['kills'] for k in range(len(result['participants'])))
                     if kills > 50 and result['gameMode'] == 'ARAM':
 
                         champions_ids = [result['participants'][p]['championId'] for p in range(10)]

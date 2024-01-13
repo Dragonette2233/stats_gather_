@@ -27,15 +27,16 @@ def parse_games():
             async with session.get(url=FEATURED_GAMES_URL.format(region=region), 
                                    **headers_timeout) as response:
                 
-                data = await response.json()
-                gameList = data['gameList']
+                if response.status == 200:
+                    data = await response.json()
+                    gameList = data['gameList']
 
                 
                 try:
                     if len(gameList) < 1:
                         # missing_regions += 1
                         return
-                except KeyError:
+                except (KeyError, NameError):
                     # missing_regions += 1
                     return
 

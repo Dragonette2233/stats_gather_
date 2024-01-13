@@ -1,6 +1,6 @@
 .env/
 __pycache__/
 STATS_ALL.txt
-api.key
+apikey
 jsn_test.py
 jsn_creating.py
