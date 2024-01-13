@@ -24,7 +24,7 @@ def gathering(puuids_set: set, area: str):
         
         return ''.join(sorted(converted_list))
 
-    logger.debug(f'[{area}] Circle rounded')
+    logger.debug('[{area}] Circle rounded'.format(area=area))
 
     for puuid in puuids_set:
         while True:
@@ -54,12 +54,12 @@ def gathering(puuids_set: set, area: str):
                     except (requests.exceptions.ConnectTimeout, 
                             requests.exceptions.ConnectionError,
                             requests.exceptions.ReadTimeout):
-                        logger.warning(f'[{area}] Connection error. Sleep for 3 seconds...')
+                        logger.warning('[{area}] Connection error. Sleep for 3 seconds...'.format(area=area))
                         time.sleep(3)
                         continue
                     except KeyError:
                         result = None
-                        logger.warning(f'[{area}] Key Error occured. Breaking...')
+                        logger.warning('[{area}] Key Error occured. Breaking...'.format(area=area))
                         break
                 
                 if result:
@@ -91,7 +91,7 @@ def gathering(puuids_set: set, area: str):
                         else:
                             time.sleep(0.4)
 
-    logger.debug(f'[{area}] Circle ended')
+    logger.debug('[{area}] Circle ended'.format(area=area))
             
             
             
