@@ -1,16 +1,35 @@
-# import nicknames_poroparse
 import puuids_parse
 import gather_matchdata
 import time
 from mcf_threads import MCFThread
-# from mcf_data import REGIONS_TUPLE
-from pprint import pprint
+import logging
+
+# Определяем уровень логирования (DEBUG - наиболее детальный, ERROR - наименее детальный)
+logging.basicConfig(level=logging.DEBUG)
+
+# Формат сообщения лога
+# %(asctime)s - Дата и время
+# %(levelname)s - Уровень логирования
+# %(message)s - Текст сообщения
+format_str = '%(asctime)s - %(levelname)s - %(message)s'
+logging.basicConfig(format=format_str)
+
+# Создаем объект логгера
+logger = logging.getLogger(__name__)
+
+# Примеры использования логгера
+# logger.debug('Это сообщение уровня DEBUG')
+# logger.info('Это сообщение уровня INFO')
+# logger.warning('Это сообщение уровня WARNING')
+# logger.error('Это сообщение уровня ERROR')
+# logger.critical('Это сообщение уровня CRITICAL')
+
+
 
 
 def main():
 
     puuids_base = puuids_parse.parse_games() # AREA::puuid
-    # print(puuids_base)
 
     base_eu = set()
     base_asia = set()

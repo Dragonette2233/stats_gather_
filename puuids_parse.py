@@ -1,6 +1,5 @@
 import asyncio
 import logging
-from pprint import pprint
 import sys
 from aiohttp import ClientSession
 from aiohttp.client_exceptions import (
@@ -12,6 +11,8 @@ from mcf_data import (
     FEATURED_GAMES_URL,
     headers_timeout
 )
+
+logger = logging.getLogger(__name__)
 
 def parse_games():
     """
@@ -77,5 +78,5 @@ def parse_games():
     if sys.platform.startswith('win'):
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(main_aram())
-    # print('here')
+
     return puuids_set

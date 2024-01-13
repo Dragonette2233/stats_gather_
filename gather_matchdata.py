@@ -1,4 +1,5 @@
 import requests
+import logging
 from mcf_data import (
     headers_timeout,
     GATHERED_MATCHES,
@@ -7,6 +8,8 @@ from mcf_data import (
     SET_LCK,
 )
 import time
+
+logger = logging.getLogger(__name__)
 
 def gathering(puuids_set: set, area: str):
 
@@ -21,11 +24,9 @@ def gathering(puuids_set: set, area: str):
         
         return ''.join(sorted(converted_list))
 
-    print(f'Circle rounded in {area}')
+    logger.debug(f'[{area}] Circle rounded')
 
     for puuid in puuids_set:
-        # print(item)
-        # area, puuid = item.split('::')
         while True:
             try:
 
@@ -43,7 +44,6 @@ def gathering(puuids_set: set, area: str):
         for game_id in result:
 
             if game_id not in GATHERED_MATCHES:
-                # print(game_id)
                 while True:
                     try:
                         result = requests.get(
@@ -54,12 +54,12 @@ def gathering(puuids_set: set, area: str):
                     except (requests.exceptions.ConnectTimeout, 
                             requests.exceptions.ConnectionError,
                             requests.exceptions.ReadTimeout):
-                        print('Connection error. Sleep for 3 seconds...')
+                        logger.warning(f'[{area}] Connection error. Sleep for 3 seconds...')
                         time.sleep(3)
                         continue
                     except KeyError:
                         result = None
-                        print('Key Error occured. Breaking...')
+                        logger.warning(f'[{area}] Key Error occured. Breaking...')
                         break
                 
                 if result:
@@ -91,7 +91,7 @@ def gathering(puuids_set: set, area: str):
                         else:
                             time.sleep(0.4)
 
-    print(f'Circle ended in {area}')
+    logger.debug(f'[{area}] Circle ended')
             
             
             
