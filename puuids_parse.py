@@ -30,7 +30,10 @@ def parse_games():
                 
                 if response.status == 200:
                     data = await response.json()
-                    gameList = data['gameList']
+                    try:
+                        gameList = data['gameList']
+                    except KeyError:
+                        return
 
                 
                 try:
