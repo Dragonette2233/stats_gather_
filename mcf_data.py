@@ -13,7 +13,7 @@ headers_timeout = {
             'headers': { "X-Riot-Token": open('apikey', 'r', encoding='utf-8').read().strip() },
             'timeout': 3
         }
-FEATURED_GAMES_URL = "https://{region}.api.riotgames.com/lol/spectator/v4/featured-games"
+FEATURED_GAMES_URL = "https://{region}.api.riotgames.com/lol/spectator/v5/featured-games"
 ALL_CHAMPIONS_IDs = {
     1: 'Annie', 2: 'Olaf', 3: 'Galio', 4: 'TwistedFate',
     5: 'XinZhao', 6: 'Urgot', 7: 'LeBlanc', 8: 'Vladimir',
